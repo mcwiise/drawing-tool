@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CreateCanvasCmdTest {
+public class DrawCanvasCmdTest {
 
     @Rule
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
@@ -24,7 +24,7 @@ public class CreateCanvasCmdTest {
     public BoardReceiver boardReceiver;
 
     @InjectMocks
-    public CreateCanvasCmd createCanvasCmd;
+    public DrawCanvasCmd drawCanvasCmd;
 
     @Before
     public void init(){
@@ -38,7 +38,7 @@ public class CreateCanvasCmdTest {
 
         given(boardReceiver.createCanvas()).willReturn(TestUtils.getExpected(testFile));
 
-        createCanvasCmd.execute();
+        drawCanvasCmd.execute();
 
         assertEquals(TestUtils.getExpected(testFile), systemOutRule.getLog());
     }
@@ -50,7 +50,7 @@ public class CreateCanvasCmdTest {
 
         given(boardReceiver.createCanvas()).willReturn(TestUtils.getExpected(testFile));
 
-        createCanvasCmd.execute();
+        drawCanvasCmd.execute();
 
         assertEquals(TestUtils.getExpected(testFile), systemOutRule.getLog());
     }
@@ -62,7 +62,7 @@ public class CreateCanvasCmdTest {
 
         given(boardReceiver.createCanvas()).willReturn(TestUtils.getExpected(testFile));
 
-        createCanvasCmd.execute();
+        drawCanvasCmd.execute();
 
         assertEquals(TestUtils.getExpected(testFile), systemOutRule.getLog());
     }

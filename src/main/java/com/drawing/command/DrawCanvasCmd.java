@@ -1,16 +1,16 @@
 package com.drawing.command;
 
-public class CreateCanvasCmd implements Command{
+public class DrawCanvasCmd implements Command{
 
     private BoardReceiver boardReceiver;
 
-    public CreateCanvasCmd(BoardReceiver boardReceiver){
+    public DrawCanvasCmd(BoardReceiver boardReceiver){
         this.boardReceiver = boardReceiver;
     }
 
     @Override
     public void execute() {
-        System.out.print(boardReceiver.createCanvas());
+        System.out.print(this.boardReceiver.createCanvas());
     }
 
 }
