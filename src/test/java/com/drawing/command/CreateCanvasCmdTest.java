@@ -1,5 +1,6 @@
 package com.drawing.command;
 
+import com.drawing.utils.TestUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,10 +34,36 @@ public class CreateCanvasCmdTest {
     @Test
     public void shouldCreateCanvas2x2Test(){
 
-        given(boardReceiver.createCanvas()).willReturn("valencia");
+        String testFile = "canvas/2x2.txt";
+
+        given(boardReceiver.createCanvas()).willReturn(TestUtils.getExpected(testFile));
 
         createCanvasCmd.execute();
 
-        assertEquals("valencia", systemOutRule.getLog());
+        assertEquals(TestUtils.getExpected(testFile), systemOutRule.getLog());
+    }
+
+    @Test
+    public void shouldCreateCanvas4x2Test(){
+
+        String testFile = "canvas/4x2.txt";
+
+        given(boardReceiver.createCanvas()).willReturn(TestUtils.getExpected(testFile));
+
+        createCanvasCmd.execute();
+
+        assertEquals(TestUtils.getExpected(testFile), systemOutRule.getLog());
+    }
+
+    @Test
+    public void shouldCreateCanvas2x4Test(){
+
+        String testFile = "canvas/2x4.txt";
+
+        given(boardReceiver.createCanvas()).willReturn(TestUtils.getExpected(testFile));
+
+        createCanvasCmd.execute();
+
+        assertEquals(TestUtils.getExpected(testFile), systemOutRule.getLog());
     }
 }
