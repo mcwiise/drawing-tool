@@ -21,10 +21,10 @@ public class DrawCanvasCmdTest {
     public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
     @Mock
-    public BoardReceiver boardReceiver;
+    private BoardReceiver boardReceiver;
 
     @InjectMocks
-    public DrawCanvasCmd drawCanvasCmd;
+    private DrawCanvasCmd drawCanvasCmd;
 
     @Before
     public void init(){
@@ -32,7 +32,7 @@ public class DrawCanvasCmdTest {
     }
 
     @Test
-    public void shouldCreateCanvas2x2Test(){
+    public void shouldDrawCanvas2x2Test(){
 
         String testFile = "canvas/2x2.txt";
 
@@ -44,7 +44,7 @@ public class DrawCanvasCmdTest {
     }
 
     @Test
-    public void shouldCreateCanvas4x2Test(){
+    public void shouldDrawCanvas4x2Test(){
 
         String testFile = "canvas/4x2.txt";
 
@@ -56,7 +56,7 @@ public class DrawCanvasCmdTest {
     }
 
     @Test
-    public void shouldCreateCanvas2x4Test(){
+    public void shouldDrawCanvas2x4Test(){
 
         String testFile = "canvas/2x4.txt";
 
