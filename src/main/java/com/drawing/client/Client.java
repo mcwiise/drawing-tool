@@ -3,23 +3,25 @@ package com.drawing.client;
 import com.drawing.command.Command;
 import com.drawing.command.CommandException;
 import com.drawing.command.Invoker;
-
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class Client {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        StringTokenizer st = new StringTokenizer(scanner.next(), " ");
         Invoker invoker = new Invoker();
+        Input input = new Input();
 
-        while(st.hasMoreElements()){
+        do{
             try {
-                Command cmd = invoker.lookUpCommand(st.nextToken());
+                String line = scanner.next();
+                input = Input.transform(line);
+                Command cmd = invoker.lookUpCommand(input.getAction());
                 cmd.execute();
             } catch (CommandException e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
-        }
+
+        } while (!input.getAction().equals(Invoker.QUIT));
     }
 }
