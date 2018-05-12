@@ -25,6 +25,10 @@ public class Input {
         this.parameters.add(parameter);
     }
 
+    public List<String> getParameters(){
+        return parameters;
+    }
+
     public static Input transform (String line){
         StringTokenizer st = new StringTokenizer(line, " ");
         Input input = new Input();
@@ -36,7 +40,6 @@ public class Input {
                 input.addParameter(st.nextToken());
             }
         }
-
         return input;
     }
 }

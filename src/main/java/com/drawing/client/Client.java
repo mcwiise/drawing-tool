@@ -17,6 +17,7 @@ public class Client {
                 String line = scanner.next();
                 input = Input.transform(line);
                 Command cmd = invoker.lookUpCommand(input.getAction());
+                cmd.setParams(input.getParameters());
                 cmd.execute();
             } catch (CommandException e) {
                 System.out.println(e.getMessage());
