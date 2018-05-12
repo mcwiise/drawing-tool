@@ -2,24 +2,30 @@ package com.drawing.command;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Invoker {
 
-    public static final Character DRAW_CANVAS = 'C';
-    public static final Character QUIT = 'Q';
+    public static final String DRAW_CANVAS = "C";
+    public static final String QUIT = "Q";
 
-    private Map<Character, Command> commandMap;
+    private Map<String, Command> cmdCatalog;
     private BoardReceiver boardReceiver;
 
     public Invoker(){
         this.boardReceiver = new BoardReceiver();
-        commandMap = new HashMap<>();
-        commandMap.put('C', new DrawCanvasCmd(this.boardReceiver));
-        commandMap.put('Q', new QuitCommand());
+        cmdCatalog = new HashMap<>();
+        cmdCatalog.put("C", new DrawCanvasCmd(this.boardReceiver));
+        cmdCatalog.put("Q", new QuitCmd());
     }
 
-    public Command lookUpCommand(Character action){
-        return commandMap.getOrDefault(action, null);
+    public Command lookUpCommand(String action) throws CommandException{
+        Optional cmdOptional = Optional.ofNullable(this.cmdCatalog.get(action));
+        if(cmdOptional.isPresent()){
+            return (Command) cmdOptional.get();
+        } else {
+            throw new CommandException("Command not found");
+        }
     }
 
 }

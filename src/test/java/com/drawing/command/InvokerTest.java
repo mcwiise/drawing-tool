@@ -19,13 +19,13 @@ public class InvokerTest {
     }
 
     @Test
-    public void shouldInvokeQuitCommandTest(){
+    public void shouldInvokeQuitCommandTest() throws CommandException {
         Command cmd = invoker.lookUpCommand(Invoker.QUIT);
-        assertThat(cmd, instanceOf(QuitCommand.class));
+        assertThat(cmd, instanceOf(QuitCmd.class));
     }
 
     @Test
-    public void shouldInvokeDrawCanvasCommandTest(){
+    public void shouldInvokeDrawCanvasCommandTest() throws CommandException {
         Command cmd = invoker.lookUpCommand(Invoker.DRAW_CANVAS);
         assertThat(cmd, instanceOf(DrawCanvasCmd.class));
     }
