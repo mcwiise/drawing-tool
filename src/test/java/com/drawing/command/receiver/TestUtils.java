@@ -1,4 +1,4 @@
-package com.drawing.utils;
+package com.drawing.command.receiver;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

@@ -2,7 +2,7 @@ package com.drawing.command;
 
 import java.util.List;
 
-public class QuitCmd implements Command {
+public class QuitCmd extends AbstractCmd implements Command {
 
     @Override
     public void setParams(List<String> params) throws CommandException {

@@ -1,5 +1,7 @@
 package com.drawing.command;
 
+import com.drawing.command.receiver.CanvasReceiver;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -10,12 +12,12 @@ public class Invoker {
     public static final String QUIT = "Q";
 
     private Map<String, Command> cmdCatalog;
-    private BoardReceiver boardReceiver;
+    private CanvasReceiver canvasReceiver;
 
     public Invoker(){
-        this.boardReceiver = new BoardReceiver();
+        this.canvasReceiver = new CanvasReceiver();
         cmdCatalog = new HashMap<>();
-        cmdCatalog.put("C", new DrawCanvasCmd(this.boardReceiver));
+        cmdCatalog.put("C", new CreateCanvasCmd(this.canvasReceiver));
         cmdCatalog.put("Q", new QuitCmd());
     }
 
