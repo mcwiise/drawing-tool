@@ -38,7 +38,7 @@ public class DrawCanvasCmd implements Command{
     }
     @Override
     public void execute(){
-        System.out.print(this.boardReceiver.createCanvas(width, height));
+        System.out.println(this.boardReceiver.createCanvas(width, height));
     }
 
 }

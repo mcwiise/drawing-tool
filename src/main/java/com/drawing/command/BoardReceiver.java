@@ -1,6 +1,6 @@
 package com.drawing.command;
 
-import com.drawing.matrix.Matrix;
+import com.drawing.utils.Matrix;
 
 public class BoardReceiver {
 
@@ -8,5 +8,9 @@ public class BoardReceiver {
         Matrix.getInstance().setSize(width, height);
         Matrix.getInstance().init();
         return Matrix.getInstance().toString();
+    }
+
+    public String createLine(int x1, int y1, int x2, int y2) {
+        return "";
     }
 }

@@ -1,4 +1,4 @@
-package com.drawing.matrix;
+package com.drawing.utils;
 
 import java.util.Arrays;
 
@@ -36,22 +36,24 @@ public class Matrix {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(this.addFrame()).append("\n");
-        Arrays.stream(this.matrix).forEach( row -> {
+        Arrays.stream(this.matrix).forEach( row ->
             sb.append("|")
                     .append(this.formatRow(row))
-                    .append("|\n");
-        });
+                    .append("|\n")
+        );
         sb.append(this.addFrame());
         return sb.toString();
     }
 
     private String formatRow(String[] row){
-        return Arrays.toString(row).replaceAll("\\[|\\]|, ", "");
+        return Arrays.toString(row)
+                .replaceAll("\\[|\\]|, ", "");
     }
 
     private String addFrame(){
         String[] frame = new String[this.width+2];
         Arrays.fill(frame, "-");
-        return Arrays.toString(frame).replaceAll("\\[|\\]|\\, ", "");
+        return Arrays.toString(frame)
+                .replaceAll("\\[|\\]|\\, ", "");
     }
 }

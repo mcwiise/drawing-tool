@@ -45,7 +45,8 @@ public class DrawCanvasCmdTest {
         drawCanvasCmd.setParams(params);
         drawCanvasCmd.execute();
 
-        assertEquals(TestUtils.getExpected(testFile), systemOutRule.getLog());
+        assertEquals(TestUtils.getExpected(testFile),
+                systemOutRule.getLog().substring(0, systemOutRule.getLog().length()-1));
     }
 
     @Test
@@ -58,7 +59,9 @@ public class DrawCanvasCmdTest {
         drawCanvasCmd.setParams(params);
         drawCanvasCmd.execute();
 
-        assertEquals(TestUtils.getExpected(testFile), systemOutRule.getLog());
+        assertEquals(TestUtils.getExpected(testFile),
+                systemOutRule.getLog().substring(0, systemOutRule.getLog().length()-1));
+
     }
 
     @Test
@@ -71,7 +74,8 @@ public class DrawCanvasCmdTest {
         drawCanvasCmd.setParams(params);
         drawCanvasCmd.execute();
 
-        assertEquals(TestUtils.getExpected(testFile), systemOutRule.getLog());
+        assertEquals(TestUtils.getExpected(testFile),
+                systemOutRule.getLog().substring(0, systemOutRule.getLog().length()-1));
     }
 
     @Test(expected = CommandException.class)
