@@ -31,7 +31,7 @@ public class DrawCanvasCmd implements Command{
                     try {
                         Integer.parseInt(e);
                         return true;
-                    } catch (NumberFormatException e1) {
+                    } catch (NumberFormatException nfe) {
                         return false;
                     }
                 });
