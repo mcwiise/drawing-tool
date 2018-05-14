@@ -40,7 +40,7 @@ public class CreateLineCmdTest {
     }
 
     @Test(expected = CommandException.class)
-    public void shouldThrowCommanExceptionWhenMoreNumberParamsTest() throws CommandException {
+    public void shouldThrowCommandExceptionWhenMoreNumberParamsTest() throws CommandException {
         List<String> params = Arrays.asList("2","4","12","15", "23");
         createLineCmd.setParams(params);
     }
@@ -53,7 +53,7 @@ public class CreateLineCmdTest {
 
     @Test(expected = CommandException.class)
     public void shouldThrowCommandExceptionWhenWrongTypeParamsTest() throws CommandException {
-        List<String> params = Arrays.asList("2","e","5", "$");
+        List<String> params = Arrays.asList("2","sdf","15", "23");
         createLineCmd.setParams(params);
     }
 

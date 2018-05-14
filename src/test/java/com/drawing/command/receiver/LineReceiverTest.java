@@ -44,6 +44,18 @@ public class LineReceiverTest {
         assertEquals(5, path.size());
     }
 
+    @Test
+    public void shouldComputePathFrom62to12Test() throws ReceiverException {
+        List<Point<Integer, Integer>> path = lineReceiver.computePath(6,2,1,2);
+        assertEquals(6, path.size());
+    }
+
+    @Test
+    public void shouldComputePathFrom67to63Test() throws ReceiverException {
+        List<Point<Integer, Integer>> path = lineReceiver.computePath(6,7,6,3);
+        assertEquals(5, path.size());
+    }
+
     @Test(expected = ReceiverException.class)
     public void shouldThrowReceiverExceptionWhenNoCanvasSetTest() throws ReceiverException {
         List<Point<Integer, Integer>> path =

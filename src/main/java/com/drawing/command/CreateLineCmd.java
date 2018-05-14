@@ -42,8 +42,8 @@ public class CreateLineCmd extends AbstractCmd implements Command{
             List<Point<Integer, Integer>> path = this.lineReceiver.computePath(x1,y1,x2,y2);
             this.lineReceiver.drawLine(path);
         } catch (ReceiverException e) {
-            e.printStackTrace();
-            throw new CommandException("ReceiverException when executing create line command. ", e);
+            System.out.println(e.getMessage());
+            throw new CommandException("Cannot create line. ");
         }
     }
 }

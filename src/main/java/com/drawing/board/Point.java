@@ -1,12 +1,12 @@
 package com.drawing.board;
 
-public class Point<X, Y> {
+public class Point<X, Y>{
     private X x;
     private Y y;
 
     public Point(X x, Y y) {
-        this.x = x;
-        this.y = y;
+        this.setX(x);
+        this.setY(y);
     }
 
     public X getX() {
@@ -17,11 +17,11 @@ public class Point<X, Y> {
         return y;
     }
 
-    @Override
-    public String toString() {
-        return "Point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+    public void setX(X x) {
+        this.x = x;
+    }
+
+    public void setY(Y y) {
+        this.y = y;
     }
 }

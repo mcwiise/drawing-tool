@@ -10,6 +10,7 @@ public class Input {
     private List<String> parameters;
 
     public Input(){
+        this.action = "";
         this.parameters = new ArrayList<>();
     }
 

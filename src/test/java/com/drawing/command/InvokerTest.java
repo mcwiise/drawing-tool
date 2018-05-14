@@ -29,4 +29,10 @@ public class InvokerTest {
         Command cmd = invoker.lookUpCommand(Invoker.DRAW_CANVAS);
         assertThat(cmd, instanceOf(CreateCanvasCmd.class));
     }
+
+    @Test(expected = CommandException.class)
+    public void shouldThrowCommandExceptionWhenNotFoundTest() throws CommandException {
+        Command cmd = invoker.lookUpCommand("adfasdfasdasdf");
+        assertThat(cmd, instanceOf(CreateCanvasCmd.class));
+    }
 }
