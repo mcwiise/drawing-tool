@@ -53,11 +53,19 @@ public class LineReceiverTest {
     @Test
     public void shouldComputePathFrom67to63Test() throws ReceiverException {
         List<Point<Integer, Integer>> path = lineReceiver.computePath(6,7,6,3);
+
         assertEquals(5, path.size());
+        assertEquals("Point{x=6, y=3}", path.get(0).toString());
+        assertEquals("Point{x=6, y=4}", path.get(1).toString());
+        assertEquals("Point{x=6, y=5}", path.get(2).toString());
+        assertEquals("Point{x=6, y=6}", path.get(3).toString());
+        assertEquals("Point{x=6, y=7}", path.get(4).toString());
+
     }
 
     @Test(expected = ReceiverException.class)
     public void shouldThrowReceiverExceptionWhenNoCanvasSetTest() throws ReceiverException {
+        Board.getInstance().setGrid(null);
         List<Point<Integer, Integer>> path =
                 Arrays.asList(new Point<>(1,2),
                         new Point<>(2,2),
@@ -71,7 +79,7 @@ public class LineReceiverTest {
 
     @Test
     public void shouldDrawLineFrom12to62Test() throws ReceiverException {
-        Board.getInstance().setGrid(mockGrid());
+        Board.getInstance().setGrid(TestUtils.mockGrid());
         List<Point<Integer, Integer>> path =
                 Arrays.asList(new Point<>(1,2),
                         new Point<>(2,2),
@@ -88,7 +96,7 @@ public class LineReceiverTest {
 
     @Test
     public void shouldDrawLineFrom61to64Test() throws ReceiverException {
-        Board.getInstance().setGrid(mockGrid());
+        Board.getInstance().setGrid(TestUtils.mockGrid());
         List<Point<Integer, Integer>> path =
                 Arrays.asList(new Point<>(6,1),
                         new Point<>(6,2),
@@ -99,23 +107,5 @@ public class LineReceiverTest {
 
         assertEquals(TestUtils.getExpected("line/20x4-VL.txt"),
                 systemOutRule.getLog().substring(0, systemOutRule.getLog().length()-1));
-    }
-
-    private static String[][] mockGrid(){
-        String[][] mockCanvas = new String[6][22];
-        Arrays.fill(mockCanvas[0], "-");
-        Arrays.fill(mockCanvas[5], "-");
-
-        for (int i = 1; i < 5; i++) {
-            for (int j = 0; j < 22; j++) {
-                if (j == 0 || j == 21) {
-                    mockCanvas[i][j] = "|";
-                } else {
-                    mockCanvas[i][j] = " ";
-                }
-            }
-        }
-
-        return mockCanvas;
     }
 }

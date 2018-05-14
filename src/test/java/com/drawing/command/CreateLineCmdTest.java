@@ -6,7 +6,6 @@ import com.drawing.command.receiver.ReceiverException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,9 +23,6 @@ import static org.mockito.Mockito.doNothing;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreateLineCmdTest {
-
-    @Rule
-    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
     @Mock
     private LineReceiver lineReceiver;

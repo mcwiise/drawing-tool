@@ -25,9 +25,21 @@ public class InvokerTest {
     }
 
     @Test
-    public void shouldInvokeDrawCanvasCommandTest() throws CommandException {
-        Command cmd = invoker.lookUpCommand(Invoker.DRAW_CANVAS);
+    public void shouldInvokeCreateCanvasCommandTest() throws CommandException {
+        Command cmd = invoker.lookUpCommand(Invoker.CREATE_CANVAS);
         assertThat(cmd, instanceOf(CreateCanvasCmd.class));
+    }
+
+    @Test
+    public void shouldInvokeCreateLineCommandTest() throws CommandException {
+        Command cmd = invoker.lookUpCommand(Invoker.CREATE_LINE);
+        assertThat(cmd, instanceOf(CreateLineCmd.class));
+    }
+
+    @Test
+    public void shouldInvokeCreateRectCommandTest() throws CommandException {
+        Command cmd = invoker.lookUpCommand(Invoker.CREATE_RECT);
+        assertThat(cmd, instanceOf(CreateRectCmd.class));
     }
 
     @Test(expected = CommandException.class)

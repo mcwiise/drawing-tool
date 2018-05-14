@@ -3,6 +3,7 @@ package com.drawing.command.receiver;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class TestUtils {
@@ -15,5 +16,23 @@ public class TestUtils {
                 .lines()
                 .collect(Collectors.joining("\n")))
                 .toString();
+    }
+
+    public static String[][] mockGrid(){
+        String[][] mockCanvas = new String[6][22];
+        Arrays.fill(mockCanvas[0], "-");
+        Arrays.fill(mockCanvas[5], "-");
+
+        for (int i = 1; i < 5; i++) {
+            for (int j = 0; j < 22; j++) {
+                if (j == 0 || j == 21) {
+                    mockCanvas[i][j] = "|";
+                } else {
+                    mockCanvas[i][j] = " ";
+                }
+            }
+        }
+
+        return mockCanvas;
     }
 }
