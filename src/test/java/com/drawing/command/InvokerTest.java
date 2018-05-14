@@ -14,7 +14,7 @@ public class InvokerTest {
     private Invoker invoker;
 
     @Before
-    public void init(){
+    public void init() throws CommandException {
         this.invoker = new Invoker();
     }
 

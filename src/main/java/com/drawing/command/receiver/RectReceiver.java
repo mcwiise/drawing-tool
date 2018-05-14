@@ -1,29 +1,62 @@
 package com.drawing.command.receiver;
 
+import com.drawing.board.Line;
+import com.drawing.board.dao.BoardDAOException;
 import com.drawing.board.Board;
+import com.drawing.board.dao.BoardDAO;
 import com.drawing.board.Point;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class RectReceiver extends AbstractReceiver{
 
-    public void drawRectangle(List<Point<Integer,Integer>> path1,
-                              List<Point<Integer,Integer>> path2,
-                              List<Point<Integer,Integer>> path3,
-                              List<Point<Integer,Integer>> path4) throws ReceiverException {
+    public RectReceiver(BoardDAO boardDAO){
+        this.boardDAO = boardDAO;
+    }
 
-        Optional gridOpt = Optional.ofNullable(Board.getInstance().getGrid());
-        if(!gridOpt.isPresent()){
-            throw new ReceiverException("Please, draw a canvas first. ");
-        } else {
-            String[][] grid = (String[][]) gridOpt.get();
-            path1.forEach(point -> grid[point.getY()][point.getX()] = "x");
-            path2.forEach(point -> grid[point.getY()][point.getX()] = "x");
-            path3.forEach(point -> grid[point.getY()][point.getX()] = "x");
-            path4.forEach(point -> grid[point.getY()][point.getX()] = "x");
-            Board.getInstance().setGrid(grid);
+    public boolean isRectangleInCanvas(Line line1, Line line2, Line line3, Line line4) throws ReceiverException {
+        return this.isLineOnCanvas(line1) &&
+                this.isLineOnCanvas(line2) &&
+                this.isLineOnCanvas(line3) &&
+                this.isLineOnCanvas(line4);
+    }
+
+    public List<List<Point<Integer,Integer>>> computePaths(Line line1, Line line2, Line line3, Line line4) throws ReceiverException {
+        List<List<Point<Integer,Integer>>> paths = new ArrayList<>();
+
+        paths.add(this.computePath(line1));
+        paths.add(this.computePath(line2));
+        paths.add(this.computePath(line3));
+        paths.add(this.computePath(line4));
+
+        return paths;
+    }
+
+    public void drawRectangle(List<List<Point<Integer, Integer>>> paths) throws ReceiverException {
+
+        try {
+            Optional oBoard = boardDAO.load();
+            if(oBoard.isPresent()){
+                Board board = (Board) oBoard.get();
+
+                String[][] grid = board.getGrid();
+                paths.stream().forEach(path ->{
+                    path.stream().forEach(point -> {
+                        grid[point.getY()][point.getX()] = "x";
+                    });
+                });
+
+                board.setGrid(grid);
+                System.out.println(board.toString());
+                this.boardDAO.save(board);
+            } else {
+                throw new ReceiverException("Canvas is not set");
+            }
+        } catch (BoardDAOException e) {
+            System.out.println(e.getMessage());
+            throw new ReceiverException("Cannot draw rectangle. ");
         }
-        System.out.println(Board.getInstance().toString());
     }
 }

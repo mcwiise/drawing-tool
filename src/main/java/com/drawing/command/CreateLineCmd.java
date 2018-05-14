@@ -1,5 +1,6 @@
 package com.drawing.command;
 
+import com.drawing.board.Line;
 import com.drawing.board.Point;
 import com.drawing.command.receiver.LineReceiver;
 import com.drawing.command.receiver.ReceiverException;
@@ -39,8 +40,16 @@ public class CreateLineCmd extends AbstractCmd implements Command{
     @Override
     public void execute() throws CommandException{
         try {
-            List<Point<Integer, Integer>> path = this.lineReceiver.computePath(x1,y1,x2,y2);
-            this.lineReceiver.drawLine(path);
+            Point<Integer, Integer> from = new Point<>(x1,y1);
+            Point<Integer, Integer> to = new Point<>(x2,y2);
+            Line line = new Line(from, to);
+
+            if(this.lineReceiver.isLineOnCanvas(line)){
+                List<Point<Integer, Integer>> path = this.lineReceiver.computePath(line);
+                this.lineReceiver.drawLine(path);
+            } else {
+                throw new CommandException("Line is out of canvas.");
+            }
         } catch (ReceiverException e) {
             System.out.println(e.getMessage());
             throw new CommandException("Cannot create line. ");

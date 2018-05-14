@@ -1,6 +1,7 @@
 package com.drawing.command;
 
 import com.drawing.command.receiver.CanvasReceiver;
+import com.drawing.command.receiver.ReceiverException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,7 +37,7 @@ public class CreateCanvasCmdTest {
     }
 
     @Test
-    public void shouldCreateCanvas2x2Test() throws CommandException {
+    public void shouldCreateCanvas2x2Test() throws CommandException, ReceiverException {
 
         List<String> params = Arrays.asList("2","2");
         doNothing().when(this.canvasReceiver).drawCanvas(anyInt(), anyInt());
@@ -48,7 +49,7 @@ public class CreateCanvasCmdTest {
     }
 
     @Test
-    public void shouldCreateCanvas4x2Test() throws CommandException {
+    public void shouldCreateCanvas4x2Test() throws CommandException, ReceiverException {
 
         List<String> params = Arrays.asList("4","2");
         doNothing().when(this.canvasReceiver).drawCanvas(anyInt(), anyInt());
@@ -60,7 +61,7 @@ public class CreateCanvasCmdTest {
     }
 
     @Test
-    public void shouldCreateCanvas2x4Test() throws CommandException {
+    public void shouldCreateCanvas2x4Test() throws CommandException, ReceiverException {
 
         List<String> params = Arrays.asList("2","4");
         doNothing().when(this.canvasReceiver).drawCanvas(anyInt(), anyInt());
@@ -72,13 +73,13 @@ public class CreateCanvasCmdTest {
     }
 
     @Test(expected = CommandException.class)
-    public void shouldThrowCommanExceptionWhenMoreNumberParamsTest() throws CommandException {
+    public void shouldThrowCommandExceptionWhenMoreNumberParamsTest() throws CommandException {
         List<String> params = Arrays.asList("2","4","12","15");
         createCanvasCmd.setParams(params);
     }
 
     @Test(expected = CommandException.class)
-    public void shouldThrowCommanExceptionWhenLessNumberParamsTest() throws CommandException {
+    public void shouldThrowCommandExceptionWhenLessNumberParamsTest() throws CommandException {
         List<String> params = Arrays.asList("2");
         createCanvasCmd.setParams(params);
     }

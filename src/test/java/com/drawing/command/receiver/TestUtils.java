@@ -1,9 +1,13 @@
 package com.drawing.command.receiver;
 
+import com.drawing.board.Board;
+import com.drawing.board.Point;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestUtils {
@@ -18,21 +22,55 @@ public class TestUtils {
                 .toString();
     }
 
-    public static String[][] mockGrid(){
-        String[][] mockCanvas = new String[6][22];
-        Arrays.fill(mockCanvas[0], "-");
-        Arrays.fill(mockCanvas[5], "-");
+    public static Board getMockBoard(){
+        Board board = new Board();
+        board.initGrid(20,4);
+        board.setGrid(mockGrid(22,6));
+        return board;
+    }
 
-        for (int i = 1; i < 5; i++) {
-            for (int j = 0; j < 22; j++) {
-                if (j == 0 || j == 21) {
-                    mockCanvas[i][j] = "|";
+    private static String[][] mockGrid(int width, int height){
+        String[][] grid = new String[height][width];
+        Arrays.fill(grid[0], "-");
+        Arrays.fill(grid[height-1], "-");
+
+        for (int i = 1; i < height-1; i++) {
+            for (int j = 0; j < width; j++) {
+                if (j == 0 || j == width-1) {
+                    grid[i][j] = "|";
                 } else {
-                    mockCanvas[i][j] = " ";
+                    grid[i][j] = " ";
                 }
             }
         }
 
-        return mockCanvas;
+        return grid;
+    }
+
+    public static List<List<Point<Integer,Integer>>> getMockPaths(){
+        List<Point<Integer, Integer>> mockPath1 =
+                Arrays.asList(new Point<>(16,1),
+                        new Point<>(17,1),
+                        new Point<>(18,1),
+                        new Point<>(19,1),
+                        new Point<>(20,1));
+
+        List<Point<Integer, Integer>> mockPath2 =
+                Arrays.asList(new Point<>(20,1),
+                        new Point<>(20,2),
+                        new Point<>(20,3));
+
+        List<Point<Integer, Integer>> mockPath3 =
+                Arrays.asList(new Point<>(16,3),
+                        new Point<>(17,3),
+                        new Point<>(18,3),
+                        new Point<>(19,3),
+                        new Point<>(20,3));
+
+        List<Point<Integer, Integer>> mockPath4 =
+                Arrays.asList(new Point<>(16,1),
+                        new Point<>(16,2),
+                        new Point<>(16,3));
+        return Arrays.asList(mockPath1, mockPath2, mockPath3, mockPath4);
     }
 }

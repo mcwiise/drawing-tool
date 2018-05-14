@@ -4,7 +4,6 @@ import com.drawing.board.Point;
 import com.drawing.command.receiver.LineReceiver;
 import com.drawing.command.receiver.ReceiverException;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,8 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.doNothing;
@@ -36,13 +34,13 @@ public class CreateLineCmdTest {
     }
 
     @Test(expected = CommandException.class)
-    public void shouldThrowCommandExceptionWhenMoreNumberParamsTest() throws CommandException {
+    public void shouldThrowExceptionWhenMoreNumberParamsTest() throws CommandException {
         List<String> params = Arrays.asList("2","4","12","15", "23");
         createLineCmd.setParams(params);
     }
 
     @Test(expected = CommandException.class)
-    public void shouldThrowCommanExceptionWhenLessNumberParamsTest() throws CommandException {
+    public void shouldThrowExceptionWhenLessNumberParamsTest() throws CommandException {
         List<String> params = Arrays.asList("2");
         createLineCmd.setParams(params);
     }
@@ -60,7 +58,9 @@ public class CreateLineCmdTest {
                 Arrays.asList(new Point<>(2,3),
                         new Point<>(2,4),
                         new Point<>(2,5));
-        given(this.lineReceiver.computePath(anyInt(), anyInt(), anyInt(), anyInt())).willReturn(mockPath);
+
+        given(this.lineReceiver.isLineOnCanvas(any())).willReturn(true);
+        given(this.lineReceiver.computePath(any())).willReturn(mockPath);
         doNothing().when(this.lineReceiver).drawLine(anyList());
 
         createLineCmd.setParams(params);
@@ -76,7 +76,9 @@ public class CreateLineCmdTest {
                 Arrays.asList(new Point<>(2,5),
                         new Point<>(3,5),
                         new Point<>(4,5));
-        given(this.lineReceiver.computePath(anyInt(), anyInt(), anyInt(), anyInt())).willReturn(mockPath);
+
+        given(this.lineReceiver.isLineOnCanvas(any())).willReturn(true);
+        given(this.lineReceiver.computePath(any())).willReturn(mockPath);
         doNothing().when(this.lineReceiver).drawLine(anyList());
 
         createLineCmd.setParams(params);
@@ -84,4 +86,15 @@ public class CreateLineCmdTest {
 
         then(this.lineReceiver).should().drawLine(mockPath);
     }
+
+    @Test(expected = CommandException.class)
+    public void shouldThrowExceptionWhenLineOutOfCanvasTest() throws CommandException, ReceiverException {
+        List<String> params = Arrays.asList("1","1","1","19");
+
+        given(this.lineReceiver.isLineOnCanvas(any())).willReturn(false);
+
+        createLineCmd.setParams(params);
+        createLineCmd.execute();
+    }
+
 }

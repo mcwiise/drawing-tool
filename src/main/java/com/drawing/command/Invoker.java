@@ -1,5 +1,8 @@
 package com.drawing.command;
 
+import com.drawing.board.dao.BoardDAO;
+import com.drawing.board.dao.BoardDAOException;
+import com.drawing.board.dao.BoardDAOImpl;
 import com.drawing.command.receiver.CanvasReceiver;
 import com.drawing.command.receiver.LineReceiver;
 import com.drawing.command.receiver.RectReceiver;
@@ -19,21 +22,29 @@ public class Invoker {
     private CanvasReceiver canvasReceiver;
     private LineReceiver lineReceiver;
     private RectReceiver rectReceiver;
+    private BoardDAO boardDAO;
 
 
-    public Invoker(){
-        this.initReceivers();
-        cmdCatalog = new HashMap<>();
-        cmdCatalog.put(CREATE_CANVAS, new CreateCanvasCmd(this.canvasReceiver));
-        cmdCatalog.put(CREATE_LINE, new CreateLineCmd(this.lineReceiver));
-        cmdCatalog.put(CREATE_RECT, new CreateRectCmd(this.rectReceiver, this.lineReceiver));
-        cmdCatalog.put(QUIT, new QuitCmd());
+    public Invoker() throws CommandException{
+        try {
+            this.initReceivers();
+            this.boardDAO.init(BoardDAO.BOARD_FILE);
+            cmdCatalog = new HashMap<>();
+            cmdCatalog.put(CREATE_CANVAS, new CreateCanvasCmd(this.canvasReceiver));
+            cmdCatalog.put(CREATE_LINE, new CreateLineCmd(this.lineReceiver));
+            cmdCatalog.put(CREATE_RECT, new CreateRectCmd(this.rectReceiver));
+            cmdCatalog.put(QUIT, new QuitCmd());
+        } catch (BoardDAOException e) {
+            System.out.println(e.getMessage());
+            throw new CommandException("Cannot initialize game. ");
+        }
     }
 
     private void initReceivers(){
-        this.canvasReceiver = new CanvasReceiver();
-        this.lineReceiver = new LineReceiver();
-        this.rectReceiver = new RectReceiver();
+        this.boardDAO = new BoardDAOImpl();
+        this.canvasReceiver = new CanvasReceiver(this.boardDAO);
+        this.lineReceiver = new LineReceiver(this.boardDAO);
+        this.rectReceiver = new RectReceiver(this.boardDAO);
     }
 
     public Command lookUpCommand(String action) throws CommandException{

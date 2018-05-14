@@ -1,28 +1,18 @@
 package com.drawing.board;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Board {
-
-    private static Board instance;
+public class Board implements Serializable {
 
     private String[][] grid;
     private int width;
     private int height;
 
-    private Board(){}
-
-    public static Board getInstance(){
-        if(instance == null){
-            instance = new Board();
-        }
-        return instance;
-    }
-
     public void initGrid(int width, int height){
         this.width = width+2;
         this.height = height+2;
-        this.setGrid(new String[this.height][this.width]);
+        this.grid = new String[this.height][this.width];
     }
 
     public String[][] getGrid() {
@@ -44,10 +34,13 @@ public class Board {
     public String toString(){
         StringBuilder sb = new StringBuilder();
 
-        Arrays.stream(this.grid).forEach(row -> {
-            sb.append(Arrays.toString(row).replaceAll("\\[|\\]|, ","")).append("\n");
-        });
+        Arrays.stream(this.getGrid())
+                .forEach(row ->
+                        sb.append(Arrays.toString(row)
+                                .replaceAll("\\[|\\]|, ",""))
+                                .append("\n"));
 
         return sb.substring(0, sb.length()-1);
     }
+
 }

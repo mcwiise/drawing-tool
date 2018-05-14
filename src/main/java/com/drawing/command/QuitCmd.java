@@ -6,7 +6,7 @@ public class QuitCmd extends AbstractCmd implements Command {
 
     @Override
     public void setParams(List<String> params) throws CommandException {
-
+        //Not necessary to implement
     }
 
     @Override

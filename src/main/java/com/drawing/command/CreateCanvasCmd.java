@@ -1,6 +1,7 @@
 package com.drawing.command;
 
 import com.drawing.command.receiver.CanvasReceiver;
+import com.drawing.command.receiver.ReceiverException;
 
 import java.util.List;
 
@@ -29,8 +30,12 @@ public class CreateCanvasCmd extends AbstractCmd implements Command{
     }
 
     @Override
-    public void execute(){
-        this.canvasReceiver.drawCanvas(width, height);
+    public void execute() throws CommandException{
+        try {
+            this.canvasReceiver.drawCanvas(width, height);
+        } catch (ReceiverException e) {
+            throw new CommandException("asdfadf");
+        }
     }
 
 }

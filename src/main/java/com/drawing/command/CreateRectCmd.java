@@ -1,7 +1,7 @@
 package com.drawing.command;
 
+import com.drawing.board.Line;
 import com.drawing.board.Point;
-import com.drawing.command.receiver.LineReceiver;
 import com.drawing.command.receiver.ReceiverException;
 import com.drawing.command.receiver.RectReceiver;
 
@@ -11,16 +11,14 @@ public class CreateRectCmd extends AbstractCmd implements Command {
 
     private static final int NUM_PARAMS = 4;
     private RectReceiver rectReceiver;
-    private LineReceiver lineReceiver;
 
     private int x1;
     private int y1;
     private int x2;
     private int y2;
 
-    public CreateRectCmd(RectReceiver rectReceiver, LineReceiver lineReceiver) {
+    public CreateRectCmd(RectReceiver rectReceiver) {
         this.rectReceiver = rectReceiver;
-        this.lineReceiver = lineReceiver;
     }
 
     @Override
@@ -42,12 +40,17 @@ public class CreateRectCmd extends AbstractCmd implements Command {
     @Override
     public void execute() throws CommandException {
         try {
-            List<Point<Integer, Integer>> path1 = this.lineReceiver.computePath(x1, y1, x2, y1);
-            List<Point<Integer, Integer>> path2 = this.lineReceiver.computePath(x2, y1, x2, y2);
-            List<Point<Integer, Integer>> path3 = this.lineReceiver.computePath(x2, y2, x1, y2);
-            List<Point<Integer, Integer>> path4 = this.lineReceiver.computePath(x1, y2, x1, y1);
+            Line line1 = new Line(new Point<>(x1, y1), new Point<>(x2,y1));
+            Line line2 = new Line(new Point<>(x2, y1), new Point<>(x2,y2));
+            Line line3 = new Line(new Point<>(x2, y2), new Point<>(x1,y2));
+            Line line4 = new Line(new Point<>(x1, y2), new Point<>(x1,y1));
 
-            this.rectReceiver.drawRectangle(path1,path2, path3, path4);
+            if(this.rectReceiver.isRectangleInCanvas(line1, line2, line3, line4)){
+                List<List<Point<Integer, Integer>>> paths = this.rectReceiver.computePaths(line1, line2, line3, line4);
+                this.rectReceiver.drawRectangle(paths);
+            } else {
+                throw new CommandException("Rectangle is out of canvas.");
+            }
         } catch (ReceiverException e) {
             System.out.println(e.getMessage());
             throw new CommandException("Cannot create rectangle. ");
