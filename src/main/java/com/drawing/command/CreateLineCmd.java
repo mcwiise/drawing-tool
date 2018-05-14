@@ -16,6 +16,9 @@ public class CreateLineCmd extends AbstractCmd implements Command{
     private int x2;
     private int y2;
 
+    public CreateLineCmd (LineReceiver lineReceiver){
+        this.lineReceiver = lineReceiver;
+    }
 
     @Override
     public void setParams(List<String> params) throws CommandException {

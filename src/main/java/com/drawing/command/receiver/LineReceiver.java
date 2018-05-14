@@ -5,6 +5,7 @@ import com.drawing.board.Point;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LineReceiver extends AbstractReceiver{
 
@@ -38,17 +39,18 @@ public class LineReceiver extends AbstractReceiver{
         if (!isHorizontalLine(from, to) && !isVerticalLine(from, to)) {
             return false;
         }
-        if (!isOnCanvas(from) || !isOnCanvas(to)){
-            return false;
-        }
         return true;
     }
 
-    public void drawLine(List<Point<Integer, Integer>> path) {
-        String[][] grid = Board.getInstance().getGrid();
-        path.stream().forEach(point -> {
-            grid[point.getX()][point.getX()] = "x";
-        });
-        Board.getInstance().setGrid(grid);
+    public void drawLine(List<Point<Integer, Integer>> path) throws ReceiverException{
+        Optional gridOpt = Optional.ofNullable(Board.getInstance().getGrid());
+        if(!gridOpt.isPresent()){
+            throw new ReceiverException("Please, draw a canvas first. ");
+        } else {
+            String[][] grid = (String[][]) gridOpt.get();
+            path.forEach(point -> grid[point.getY()][point.getX()] = "x");
+            Board.getInstance().setGrid(grid);
+        }
+        System.out.println(Board.getInstance().toString());
     }
 }

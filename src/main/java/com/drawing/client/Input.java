@@ -32,8 +32,9 @@ public class Input {
     public static Input transform (String line){
         StringTokenizer st = new StringTokenizer(line, " ");
         Input input = new Input();
+        int tokens=st.countTokens();
 
-        for(int i=0; i<st.countTokens(); i++){
+        for(int i=0; i<tokens; i++){
             if (i==0){
                 input.setAction(st.nextToken());
             } else {

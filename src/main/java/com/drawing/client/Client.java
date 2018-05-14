@@ -14,7 +14,8 @@ public class Client {
 
         do{
             try {
-                String line = scanner.next();
+                System.out.print("enter command: ");
+                String line = scanner.nextLine();
                 input = Input.transform(line);
                 Command cmd = invoker.lookUpCommand(input.getAction());
                 cmd.setParams(input.getParameters());
