@@ -11,8 +11,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             Scanner scanner = new Scanner(System.in);
-            Invoker invoker = null;
-            invoker = new Invoker();
+            Invoker invoker = new Invoker();
             Input input = new Input();
 
             do{

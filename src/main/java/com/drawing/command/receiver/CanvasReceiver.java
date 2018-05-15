@@ -1,8 +1,8 @@
 package com.drawing.command.receiver;
 
-import com.drawing.board.dao.BoardDAOException;
 import com.drawing.board.Board;
 import com.drawing.board.dao.BoardDAO;
+import com.drawing.board.dao.BoardDAOException;
 
 import java.util.Arrays;
 

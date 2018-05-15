@@ -1,8 +1,7 @@
 package com.drawing.command.receiver;
 
-import com.drawing.board.Board;
-import com.drawing.board.dao.BoardDAOException;
 import com.drawing.board.dao.BoardDAO;
+import com.drawing.board.dao.BoardDAOException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -13,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.then;

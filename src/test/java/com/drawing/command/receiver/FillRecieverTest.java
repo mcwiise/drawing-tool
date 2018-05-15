@@ -4,7 +4,6 @@ import com.drawing.board.Point;
 import com.drawing.board.dao.BoardDAO;
 import com.drawing.board.dao.BoardDAOException;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;

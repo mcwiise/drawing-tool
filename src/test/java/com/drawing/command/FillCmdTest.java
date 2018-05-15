@@ -1,8 +1,6 @@
 package com.drawing.command;
 
-import com.drawing.board.Point;
 import com.drawing.command.receiver.FillReciever;
-import com.drawing.command.receiver.LineReceiver;
 import com.drawing.command.receiver.ReceiverException;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,10 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.doNothing;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FillCmdTest {
@@ -54,7 +49,8 @@ public class FillCmdTest {
     }
 
     @Test
-    public void shouldFillTest() throws CommandException {
+    public void shouldFillTest() throws CommandException, ReceiverException {
+        given(this.fillReciever.isPointOnCanvas(any())).willReturn(true);
         List<String> params = Arrays.asList("2", "2", "b");
         fillCmd.setParams(params);
         fillCmd.execute();

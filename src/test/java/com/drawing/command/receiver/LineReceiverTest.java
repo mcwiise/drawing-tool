@@ -2,8 +2,8 @@ package com.drawing.command.receiver;
 
 import com.drawing.board.Line;
 import com.drawing.board.Point;
-import com.drawing.board.dao.BoardDAOException;
 import com.drawing.board.dao.BoardDAO;
+import com.drawing.board.dao.BoardDAOException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
