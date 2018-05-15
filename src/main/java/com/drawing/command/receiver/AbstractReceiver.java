@@ -41,7 +41,7 @@ public abstract class AbstractReceiver {
             boolean isOnCanvas = false;
             if(oBoard.isPresent()){
                 Board board = oBoard.get();
-                if(this.isPointOnCanvas(line.getFrom(), board) && this.isPointOnCanvas(line.getTo(), board)){
+                if(this.isPointOnCanvas(line.getFrom()) && this.isPointOnCanvas(line.getTo())){
                     isOnCanvas = true;
                 }
             }
@@ -52,14 +52,40 @@ public abstract class AbstractReceiver {
         }
     }
 
-    private boolean isPointOnCanvas(Point<Integer, Integer> point, Board board){
-        boolean isOnCanvas = false;
-        if(point.getX() > 0
-                && point.getX() < board.getWidth()-1
-                && point.getY() > 0
-                && point.getY() < board.getHeight()-1){
-            isOnCanvas = true;
+    public boolean isPointOnCanvas(Point<Integer, Integer> point) throws ReceiverException {
+        try {
+            Optional<Board> oBoard = this.boardDAO.load();
+            boolean isOnCanvas = false;
+            if(oBoard.isPresent()){
+                Board board = oBoard.get();
+                if(point.getX() > 0
+                        && point.getX() < board.getWidth()-1
+                        && point.getY() > 0
+                        && point.getY() < board.getHeight()-1){
+                    isOnCanvas = true;
+                }
+            }
+            return isOnCanvas;
+        } catch (BoardDAOException e) {
+            System.out.println(e.getMessage());
+            throw new ReceiverException("Cannot define if point on canvas. ");
         }
-        return isOnCanvas;
+    }
+
+    protected void fillGrid(int x, int y, String[][] grid, String filler){
+        if (x < 1) return;
+        if (y < 1) return;
+        if (x >= grid.length-1) return;
+        if (y >= grid[x].length-1) return;
+
+        if (filler.equals(grid[x][y])) return;
+        if ("x".equals(grid[x][y])) return;
+
+        grid[x][y] = filler;
+
+        fillGrid(x - 1, y, grid, filler);
+        fillGrid(x + 1, y, grid, filler);
+        fillGrid(x, y - 1, grid, filler);
+        fillGrid(x, y + 1, grid, filler);
     }
 }
