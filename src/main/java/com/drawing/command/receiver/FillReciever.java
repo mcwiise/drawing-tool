@@ -7,12 +7,23 @@ import com.drawing.board.dao.BoardDAOException;
 
 import java.util.Optional;
 
+/**
+ * This is a concrete implementation of an {@link AbstractReceiver}.
+ * It keeps the logic to fill a canvas with a character
+ */
 public class FillReciever extends AbstractReceiver {
 
     public FillReciever(BoardDAO boardDAO){
         this.boardDAO = boardDAO;
     }
 
+    /**
+     * Fills a canvas with a given character
+     * @param point the point where to start filling from
+     * @param filler the character what to fill the board with
+     * @throws ReceiverException If there is a problem accessing the board, or
+     * if the canvas is not set
+     */
     public void fill(Point<Integer, Integer> point, String filler) throws ReceiverException {
         try {
             Optional oBoard = boardDAO.load();
