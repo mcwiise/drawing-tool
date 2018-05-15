@@ -6,6 +6,10 @@ import com.drawing.command.receiver.ReceiverException;
 
 import java.util.List;
 
+/**
+ * This is a concrete implementation of a {@link Command}.
+ * It defines the logic to fill the canvas with a specific character
+ */
 public class FillCmd  extends AbstractCmd implements Command {
 
     private static final int NUM_PARAMS = 3;

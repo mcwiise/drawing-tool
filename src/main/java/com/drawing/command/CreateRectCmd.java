@@ -7,6 +7,10 @@ import com.drawing.command.receiver.RectReceiver;
 
 import java.util.List;
 
+/**
+ * This is a concrete implementation of a {@link Command}.
+ * It defines the logic to create Rectangles in the canvas
+ */
 public class CreateRectCmd extends AbstractCmd implements Command {
 
     private static final int NUM_PARAMS = 4;

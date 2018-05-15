@@ -4,6 +4,10 @@ import com.drawing.board.dao.BoardDAO;
 
 import java.util.List;
 
+/**
+ * This is a concrete implementation of a {@link Command}.
+ * It quits the application
+ */
 public class QuitCmd extends AbstractCmd implements Command {
 
     private BoardDAO boardDAO;

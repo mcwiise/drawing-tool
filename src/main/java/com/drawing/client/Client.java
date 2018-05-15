@@ -6,6 +6,9 @@ import com.drawing.command.Invoker;
 
 import java.util.Scanner;
 
+/**
+ * This is the client to start the drawing tool
+ */
 public class Client {
 
     public static void main(String[] args) {

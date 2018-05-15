@@ -5,6 +5,10 @@ import com.drawing.command.receiver.ReceiverException;
 
 import java.util.List;
 
+/**
+ * This is an concrete implementation of a {@link Command}. Defines
+ * the logic to create a Canvas in the Board
+ */
 public class CreateCanvasCmd extends AbstractCmd implements Command{
 
     private CanvasReceiver canvasReceiver;

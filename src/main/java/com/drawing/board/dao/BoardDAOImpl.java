@@ -5,6 +5,9 @@ import com.drawing.board.Board;
 import java.io.*;
 import java.util.Optional;
 
+/**
+ * Concrete implementation of {@link BoardDAO} interface
+ */
 public class BoardDAOImpl implements BoardDAO {
 
     private FileOutputStream fos;

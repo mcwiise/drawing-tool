@@ -1,5 +1,8 @@
 package com.drawing.board;
 
+/**
+ * This is representation of a line to draw in a board
+ */
 public class Line {
 
     public static final String VERTICAL = "vertical";
@@ -22,26 +25,52 @@ public class Line {
         this.setDirection();
     }
 
+    /**
+     * getter
+     * @return line direction
+     */
     public String getDirection(){
         return this.direction;
     }
 
+    /**
+     * getter
+     * @return the point where the line starts
+     */
     public Point<Integer, Integer> getFrom() {
         return from;
     }
 
+    /**
+     * setter
+     * @param from the initial point to set
+     */
     public void setFrom(Point<Integer, Integer> from) {
         this.from = from;
     }
 
+    /**
+     * getter
+     * @return the final point where the line ends
+     */
     public Point<Integer, Integer> getTo() {
         return to;
     }
 
+    /**
+     * setter
+     * @param to the final point to set
+     */
     public void setTo(Point<Integer, Integer> to) {
         this.to = to;
     }
 
+    /**
+     * the method sets the line's direction from
+     * Line.HORIZONTAL
+     * Line.VERTICAL
+     * Line.NONE
+     */
     private void setDirection() {
         if(isHorizontalLine()){
             this.direction = Line.HORIZONTAL;
@@ -52,6 +81,10 @@ public class Line {
         }
     }
 
+    /**
+     * Defines if a line's direction is vertical
+     * @return true if the line is vertical
+     */
     private boolean isVerticalLine(){
         if (from.getX().equals(to.getX())){
             if (from.getY() > to.getY()){
@@ -65,6 +98,10 @@ public class Line {
         }
     }
 
+    /**
+     * Defines if a line's direction is horizontal
+     * @return true if the line is horizontal
+     */
     private boolean isHorizontalLine() {
         if (from.getY().equals(to.getY())){
             if (from.getX() > to.getX()){
